@@ -1,0 +1,14 @@
+{
+  "id": "09",
+  "repo": "agentic-commerce-partner-integrations",
+  "title": "Partner Integration Adapter",
+  "summary": "Fake Partner A/B request transformation, response normalization, retry/circuit-breaker pattern, and DLQ-ready adapter.",
+  "copy": [
+    "partner-integrations"
+  ],
+  "extra_tests": {
+    "tests/test_partner_adapter.py": "\n                import sys\n                from pathlib import Path\n\n                sys.path.insert(0, str(Path('partner-integrations').resolve()))\n                from partner_adapter import PartnerAdapter\n\n                def test_partner_a_normalization():\n                    result = PartnerAdapter().handle('A', {'itemCode': 'SKU-PASTA-001', 'location': 'store_1001', 'qty': 2})\n                    assert result['normalized_request'] == {'sku': 'SKU-PASTA-001', 'store_id': 'store_1001', 'quantity': 2}\n                    assert result['partner_response']['available'] is True\n            "
+  },
+  "verify": "python3.11 -m pytest tests",
+  "run": "cd partner-integrations && python3.11 retry_and_circuit_breaker_demo.py"
+}

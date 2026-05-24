@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "required": [
+    "itemCode",
+    "location",
+    "qty"
+  ],
+  "properties": {
+    "itemCode": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "qty": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}
